@@ -137,8 +137,10 @@ class TestOrdersList:
         }
         requests.post(f"{BASE_URL}/orders", json=order_data)
         response = requests.get(f"{BASE_URL}/orders")
-        assert response.status_code == 200
+        assert response.status_code == 200 # 504 ошибка вылетает периодически, проблемы с сервером?
         orders = response.json().get("orders")
         assert isinstance(orders, list)
         for order in orders:
             assert "id" in order
+
+
